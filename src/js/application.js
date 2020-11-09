@@ -93,7 +93,7 @@ $(document).ready(function() {
 
 
     let is_running = false;
-    $(window).on('touchmove touchstart', function () {
+    $(document).on('click touchstart', function () {
         // Request permission for iOS 13+ devices
         if (
             DeviceMotionEvent &&
