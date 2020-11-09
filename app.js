@@ -11078,7 +11078,7 @@ module.exports = function(module) {
     $(".mainheading--desktop").css("font-variation-settings", " 'wght' " + yWeight + ", 'wdth' " + xWidth + "");
   });
   var is_running = false;
-  $(window).on('touchmove touchstart', function (event) {
+  $(document).on('click touchstart', function () {
     // Request permission for iOS 13+ devices
     if (DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === "function") {
       DeviceMotionEvent.requestPermission();
