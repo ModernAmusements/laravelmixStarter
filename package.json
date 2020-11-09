@@ -24,7 +24,7 @@
     "postcss-css-variables": "^0.17.0",
     "resolve-url-loader": "^3.1.0",
     "sass": "^1.27.0",
-    "sass-loader": "^8.0.2",
+    "sass-loader": "^8.0.2"
   },
   "dependencies": {
     "input-range-scss": "^1.5.2",
