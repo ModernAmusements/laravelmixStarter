@@ -11078,7 +11078,7 @@ module.exports = function(module) {
     $(".mainheading--desktop").css("font-variation-settings", " 'wght' " + yWeight + ", 'wdth' " + xWidth + "");
   });
   var is_running = false;
-  $(document).on('click touchstart', function () {
+  $(document).on('click touchstart', function (event) {
     // Request permission for iOS 13+ devices
     if (DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === "function") {
       DeviceMotionEvent.requestPermission();
@@ -11087,28 +11087,31 @@ module.exports = function(module) {
     if (is_running) {
       console.log('Request permission for iOS 13+ devices');
     } else {
-      $('.mainheading').removeClass('mainheading--desktop').addClass('mainheading--mobile'); // access accelaration values and round them
+      // mobile cover
+      window.ondevicemotion = function (event) {
+        $('.mainheading').removeClass('mainheading--desktop').addClass('mainheading--mobile'); // access accelaration values and round them
 
-      xAcc = event.accelerationIncludingGravity.x;
-      yAcc = event.accelerationIncludingGravity.y;
-      xAccFixed = (Math.round(xAcc * 10) / 10).toFixed();
-      yAccFixed = (Math.round(yAcc * 10) / 10).toFixed(); // translate values to font axes
-      // reine übertragung von sensoren zu achsen:
-      // xWidthAcc = 400+xAccFixed*10;
-      // yWeightAcc = 60+yAccFixed*2;
-      // übertragung + anpassung der werte für bessere UX:
+        xAcc = event.accelerationIncludingGravity.x;
+        yAcc = event.accelerationIncludingGravity.y;
+        xAccFixed = (Math.round(xAcc * 10) / 10).toFixed();
+        yAccFixed = (Math.round(yAcc * 10) / 10).toFixed(); // translate values to font axes
+        // reine übertragung von sensoren zu achsen:
+        // xWidthAcc = 400+xAccFixed*10;
+        // yWeightAcc = 60+yAccFixed*2;
+        // übertragung + anpassung der werte für bessere UX:
 
-      xWidthAcc = 500 + xAccFixed * 20;
-      yWeightAcc = 100 + yAccFixed * 4; // $(".mainheading--mobile").css(
-      //   "font-variation-settings",
-      //   " 'wght' " + yWeightAcc +", 'wdth' " + xWidthAcc + ""
-      // );
-      // change font axes
-      // (only if x value is divisable by 20 to reduce jittering)
+        xWidthAcc = 500 + xAccFixed * 20;
+        yWeightAcc = 100 + yAccFixed * 4; // $(".mainheading--mobile").css(
+        //   "font-variation-settings",
+        //   " 'wght' " + yWeightAcc +", 'wdth' " + xWidthAcc + ""
+        // );
+        // change font axes
+        // (only if x value is divisable by 20 to reduce jittering)
 
-      if (xWidthAcc % 20 == 0) {
-        $(".mainheading--mobile").css("font-variation-settings", " 'wght' " + yWeightAcc + ", 'wdth' " + xWidthAcc + "");
-      }
+        if (xWidthAcc % 20 == 0) {
+          $(".mainheading--mobile").css("font-variation-settings", " 'wght' " + yWeightAcc + ", 'wdth' " + xWidthAcc + "");
+        }
+      };
     }
   }); // SECTION.EXAMPLES
 

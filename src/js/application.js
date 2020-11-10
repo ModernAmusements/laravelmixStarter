@@ -93,7 +93,7 @@ $(document).ready(function() {
 
 
     let is_running = false;
-    $(document).on('click touchstart', function () {
+    $(document).on('click touchstart', function (event) {
         // Request permission for iOS 13+ devices
         if (
             DeviceMotionEvent &&
@@ -105,38 +105,43 @@ $(document).ready(function() {
             console.log('Request permission for iOS 13+ devices')
         } else {
 
-            $('.mainheading').removeClass('mainheading--desktop').addClass('mainheading--mobile');
+        // mobile cover
+    window.ondevicemotion = function(event) {
 
-            // access accelaration values and round them
-            xAcc = event.accelerationIncludingGravity.x;
-            yAcc = event.accelerationIncludingGravity.y;
+      $('.mainheading').removeClass('mainheading--desktop').addClass('mainheading--mobile');
 
-            xAccFixed = (Math.round(xAcc * 10) / 10).toFixed();
-            yAccFixed = (Math.round(yAcc * 10) / 10).toFixed();
+      // access accelaration values and round them
+      xAcc = event.accelerationIncludingGravity.x;
+      yAcc = event.accelerationIncludingGravity.y;
 
-            // translate values to font axes
+      xAccFixed = (Math.round(xAcc * 10) / 10).toFixed();
+      yAccFixed = (Math.round(yAcc * 10) / 10).toFixed();
 
-            // reine übertragung von sensoren zu achsen:
-            // xWidthAcc = 400+xAccFixed*10;
-            // yWeightAcc = 60+yAccFixed*2;
+      // translate values to font axes
 
-            // übertragung + anpassung der werte für bessere UX:
-            xWidthAcc = 500 + xAccFixed * 20;
-            yWeightAcc = 100 + yAccFixed * 4;
+      // reine übertragung von sensoren zu achsen:
+      // xWidthAcc = 400+xAccFixed*10;
+      // yWeightAcc = 60+yAccFixed*2;
 
-            // $(".mainheading--mobile").css(
-            //   "font-variation-settings",
-            //   " 'wght' " + yWeightAcc +", 'wdth' " + xWidthAcc + ""
-            // );
+      // übertragung + anpassung der werte für bessere UX:
+      xWidthAcc = 500 + xAccFixed * 20;
+      yWeightAcc = 100 + yAccFixed * 4;
 
-            // change font axes
-            // (only if x value is divisable by 20 to reduce jittering)
-            if (xWidthAcc % 20 == 0) {
-                $(".mainheading--mobile").css(
-                    "font-variation-settings",
-                    " 'wght' " + yWeightAcc + ", 'wdth' " + xWidthAcc + ""
-                );
-            }
+      // $(".mainheading--mobile").css(
+      //   "font-variation-settings",
+      //   " 'wght' " + yWeightAcc +", 'wdth' " + xWidthAcc + ""
+      // );
+
+      // change font axes
+      // (only if x value is divisable by 20 to reduce jittering)
+      if (xWidthAcc % 20 == 0) {
+          $(".mainheading--mobile").css(
+              "font-variation-settings",
+              " 'wght' " + yWeightAcc + ", 'wdth' " + xWidthAcc + ""
+          );
+      }
+  };
+
         }
     });
 
