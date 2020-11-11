@@ -11026,8 +11026,6 @@ module.exports = function(module) {
       } else {
         $(this).next('.btn-reset').removeClass('btn-topright--visible');
       }
-
-      ;
     });
 
     if ($(this).html() != $(this).data('reset')) {
@@ -11035,8 +11033,6 @@ module.exports = function(module) {
     } else {
       $(this).next('.btn-reset').removeClass('btn-topright--visible');
     }
-
-    ;
   });
   $('.contenteditable').on('blur', function () {
     setTimeout(function () {
@@ -11060,7 +11056,7 @@ module.exports = function(module) {
   }); // SECTION.COVER
   // desktop cover
 
-  $(document).on("mousemove", function (event) {
+  $(document).on('mousemove', function (event) {
     $('.cover-desktop-note-x, .cover-desktop-note-y').css('animation', 'fadeout 1.2s 6s forwards linear');
     $('.mainheading').addClass('mainheading--desktop'); // track cursor position on viewport in percent
 
@@ -11075,24 +11071,25 @@ module.exports = function(module) {
     xWidth = 400 + xPercentFixed * 2;
     yWeight = 60 + yPercentFixed * 40 / 100; // change font axes
 
-    $(".mainheading--desktop").css("font-variation-settings", " 'wght' " + yWeight + ", 'wdth' " + xWidth + "");
+    $('.mainheading--desktop').css('font-variation-settings', " 'wght' " + yWeight + ", 'wdth' " + xWidth + '');
   });
   var is_running = false;
   $(document).on('click touchstart', function (event) {
     // Request permission for iOS 13+ devices
-    if (DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === "function") {
+    if (DeviceMotionEvent && typeof DeviceMotionEvent.requestPermission === 'function') {
       DeviceMotionEvent.requestPermission();
     }
 
     if (is_running) {
       console.log('Request permission for iOS 13+ devices');
+      is_running = false;
     } else {
       // mobile cover
       window.ondevicemotion = function (event) {
         $('.mainheading').removeClass('mainheading--desktop').addClass('mainheading--mobile'); // access accelaration values and round them
 
-        xAcc = event.accelerationIncludingGravity.x;
-        yAcc = event.accelerationIncludingGravity.y;
+        xAcc = event.alpha;
+        yAcc = event.beta;
         xAccFixed = (Math.round(xAcc * 10) / 10).toFixed();
         yAccFixed = (Math.round(yAcc * 10) / 10).toFixed(); // translate values to font axes
         // reine übertragung von sensoren zu achsen:
@@ -11109,16 +11106,18 @@ module.exports = function(module) {
         // (only if x value is divisable by 20 to reduce jittering)
 
         if (xWidthAcc % 20 == 0) {
-          $(".mainheading--mobile").css("font-variation-settings", " 'wght' " + yWeightAcc + ", 'wdth' " + xWidthAcc + "");
+          $('.mainheading--mobile').css('font-variation-settings', " 'wght' " + yWeightAcc + ", 'wdth' " + xWidthAcc + '');
         }
       };
+
+      is_running = true;
     }
   }); // SECTION.EXAMPLES
 
-  var title = "Scope – a variable typeface designed to enable typographic interactions";
+  var title = 'Scope – a variable typeface designed to enable typographic interactions';
   History.pushState({
     state: 0
-  }, title, "");
+  }, title, '');
 
   (function (window, undefined) {
     // Bind to StateChange Event
@@ -11132,7 +11131,7 @@ module.exports = function(module) {
     var number = $(this).html();
     History.pushState({
       state: number
-    }, title, "?example=0" + number);
+    }, title, '?example=0' + number);
     var url = $(this).attr('href'); // var title = $(this).attr('title');
 
     event.preventDefault();
@@ -11163,7 +11162,7 @@ module.exports = function(module) {
       $('.btn-close').removeClass('btn-topright--visible');
       History.pushState({
         state: 0
-      }, title, "?");
+      }, title, '?');
     }
   }); // close button
 
@@ -11174,7 +11173,7 @@ module.exports = function(module) {
     $(this).removeClass('btn-topright--visible');
     History.pushState({
       state: 0
-    }, title, "?");
+    }, title, '?');
   });
   $(window).on('popstate', function () {
     $('.examples-popup').removeClass('examples-popup--visible');
@@ -11247,20 +11246,20 @@ module.exports = function(module) {
   var value_width = $('.slider-width').val();
   $('.slider-weight-value').html(value_weight);
   $('.slider-width-value').html(value_width);
-  $('.slider-weight, .slider-width').on("input", function () {
+  $('.slider-weight, .slider-width').on('input', function () {
     var value_weight = $('.slider-weight').val();
     var value_width = $('.slider-width').val();
     $('.slider-weight-value').html(value_weight);
     $('.slider-width-value').html(value_width);
-    $(".react-to-slider-1-2").css("font-variation-settings", " 'wght' " + value_weight + ", 'wdth' " + value_width + "");
+    $('.react-to-slider-1-2').css('font-variation-settings', " 'wght' " + value_weight + ", 'wdth' " + value_width + '');
   }); // slider 2
 
   var value_size = $('.slider-size').val();
   $('.slider-size-value').html(value_size);
-  $('.slider-size').on("input", function () {
+  $('.slider-size').on('input', function () {
     var value_size = $('.slider-size').val();
     $('.slider-size-value').html(value_size);
-    $(".react-to-slider-3").css("font-size", value_size + "px");
+    $('.react-to-slider-3').css('font-size', value_size + 'px');
   }); // SECTION.GLYPHS
   // disable glyph zoom outside of active area
 
@@ -11301,8 +11300,8 @@ module.exports = function(module) {
     $('.glyph-zoom').removeClass('glyph-zoom--visible');
   }); // FEATURE DETECTION
 
-  if ($('body').css("font-variation-settings")) {} else {
-    alert("Your browser does not support variable fonts. You can still use the site, but not the fun features.");
+  if ($('body').css('font-variation-settings')) {} else {
+    alert('Your browser does not support variable fonts. You can still use the site, but not the fun features.');
     $('body').addClass('no-variable-fonts');
   }
 });
