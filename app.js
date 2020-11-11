@@ -11088,8 +11088,8 @@ module.exports = function(module) {
       window.ondevicemotion = function (event) {
         $('.mainheading').removeClass('mainheading--desktop').addClass('mainheading--mobile'); // access accelaration values and round them
 
-        xAcc = event.alpha;
-        yAcc = event.beta;
+        xAcc = event.rotationRate.alpha;
+        yAcc = event.rotationRate.beta;
         xAccFixed = (Math.round(xAcc * 10) / 10).toFixed();
         yAccFixed = (Math.round(yAcc * 10) / 10).toFixed(); // translate values to font axes
         // reine übertragung von sensoren zu achsen:
