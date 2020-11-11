@@ -118,8 +118,8 @@ $(document).ready(function() {
           .addClass('mainheading--mobile');
 
         // access accelaration values and round them
-        xAcc = event.rotationRate.alpha;
-        yAcc = event.rotationRate.beta;
+        xAcc = event.rotationRate.beta;
+        yAcc = event.rotationRate.gamma;
 
         xAccFixed = (Math.round(xAcc * 10) / 10).toFixed();
         yAccFixed = (Math.round(yAcc * 10) / 10).toFixed();
